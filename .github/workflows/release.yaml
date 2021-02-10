@@ -22,8 +22,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: ${PACKAGE_VERSION}
-          release_name: Release ${PACKAGE_NAME} ${PACKAGE_VERSION}
+          tag_name: '${{env.PACKAGE_VERSION}}'
+          release_name: 'Release ${{env.PACKAGE_NAME}} {{env.PACKAGE_VERSION}}'
           draft: false
           prerelease: false
           owner: Subarna Karki
