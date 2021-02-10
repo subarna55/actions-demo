@@ -31,3 +31,14 @@ jobs:
           draft: false
           prerelease: false
           owner: Subarna Karki
+
+
+      #  https://github.com/marketplace/actions/automatic-releases
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: '${{env.PACKAGE_VERSION}}'
+          prerelease: false
+          title: "Release ${{env.PACKAGE_NAME}} ${{env.PACKAGE_VERSION}}"
+          files: |
+            **
