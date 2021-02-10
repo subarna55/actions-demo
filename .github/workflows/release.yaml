@@ -30,5 +30,6 @@ jobs:
           config-name: release-drafter.yml
           name: "Release ${{env.PACKAGE_NAME}}"
           tag: "v${{env.PACKAGE_VERSION}}"
+          prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
