@@ -15,12 +15,18 @@ jobs:
           echo "PACKAGE_NAME=$( cat package.json | jq -r '.name' )" >> $GITHUB_ENV
           echo "PACKAGE_VERSION=$( cat package.json | jq -r '.version' )" >> $GITHUB_ENV
 
-      #  https://github.com/marketplace/actions/automatic-releases
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      # #  https://github.com/marketplace/actions/automatic-releases
+      # - uses: "marvinpinto/action-automatic-releases@latest"
+      #   with:
+      #     repo_token: "${{ secrets.GITHUB_TOKEN }}"
+      #     automatic_release_tag: '${{env.PACKAGE_VERSION}}'
+      #     prerelease: false
+      #     title: "Release ${{env.PACKAGE_NAME}} ${{env.PACKAGE_VERSION}}"
+      #     files: |
+      #       **
+      - uses: release-drafter/release-drafter@v5
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: '${{env.PACKAGE_VERSION}}'
-          prerelease: false
-          title: "Release ${{env.PACKAGE_NAME}} ${{env.PACKAGE_VERSION}}"
-          files: |
-            **
+          # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
+          config-name: release-drafter.yml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

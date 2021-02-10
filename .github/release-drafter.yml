@@ -1,0 +1,7 @@
+name-template: "Release ${{env.PACKAGE_NAME}} ${{env.PACKAGE_VERSION}}"
+tag-template: '${{env.PACKAGE_VERSION}}'
+change-template: '- @$AUTHOR'
+template: |
+  ## Changes
+
+  $CHANGES
