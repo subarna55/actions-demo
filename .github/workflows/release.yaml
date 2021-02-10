@@ -6,25 +6,15 @@ jobs:
   run-github-actions:
     runs-on: ubuntu-latest
     steps:
-      - name: List Files
-        run: |
-          pwd
-          ls -a
       - name: Checkout
         uses: actions/checkout@v1
-      - name: List files after checkout
+
+      - name : Setup env
         run: |
-          pwd
-          ls -a
-      - name: Simple JS Action
-        id: greet
-        uses: actions/hello-world-javascript-action@v1
-        with: 
-          who-to-greet: Subarna
-      - name: Log Greeting Time
-        run: |
-          echo "${{ steps.greet.outputs.time }}"
-          date
+          sudo apt-get install -y jq
+          echo "PACKAGE_NAME=$( cat package.json | jq -r '.name' )" >> $GITHUB_ENV
+          echo "PACKAGE_VERSION=$( cat package.json | jq -r '.version' )" >> $GITHUB_ENV
+
       # https://github.com/actions/create-release
       - name: Create release
         id: create_release
@@ -33,7 +23,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
           tag_name: ${PACKAGE_VERSION}
-          release_name: Test Aggregator API ${PACKAGE_VERSION}
+          release_name: Release ${PACKAGE_NAME} ${PACKAGE_VERSION}
           draft: false
           prerelease: false
-          owner: Quality Engineering 
+          owner: Subarna Karki
