@@ -24,9 +24,6 @@ jobs:
         with:
           tag_name: '${{env.PACKAGE_VERSION}}'
           release_name: 'Release ${{env.PACKAGE_NAME}} ${{env.PACKAGE_VERSION}}'
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
           draft: false
           prerelease: false
+          owner: Subarna Karki
