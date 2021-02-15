@@ -22,6 +22,8 @@ jobs:
         run: |
           git config user.email QualityEngineering@gannett.com
           git config user.name quality-engineering
+          npm --no-git-tag-version version patch > ${{github.workspace)}}/version
+          echo "PACKAGE_VERSION=$( cat package.json | jq -r '.version' )" >> $GITHUB_ENV
 
           retryCount=0
           until [ "$n" -ge 5 ]
