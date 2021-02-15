@@ -23,6 +23,7 @@ jobs:
         run: |
           sudo apt-get install jq
           echo "PACKAGE_NAME=$( cat package.json | jq -r '.name' )" >> $GITHUB_ENV
+          echo ${{github.repository}}
 
       - name: bump version and push to github
         run: |
@@ -35,7 +36,7 @@ jobs:
           retryCount=0
           until [ "$n" -ge 5 ]
           do
-            git push https://${{ secrets.USER }}:${{secrets.TOKEN}}@github.com/GannettDigital/${REPO_NAME}.git && break
+            git push https://${{ secrets.USER }}:${{secrets.TOKEN}}@github.com/${{github.repository}}.git && break
             n=$((n+1))
             sleep 5s
             git pull --no-edit origin master
