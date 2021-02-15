@@ -35,7 +35,7 @@ jobs:
           retryCount=0
           until [ "$n" -ge 5 ]
           do
-            git push https://$GH_USERNAME:$GH_TOKEN@github.com/GannettDigital/${REPO_NAME}.git && break
+            git push https://${{ secrets.USER }}:${{secrets.TOKEN}}@github.com/GannettDigital/${REPO_NAME}.git && break
             n=$((n+1))
             sleep 5s
             git pull --no-edit origin master
