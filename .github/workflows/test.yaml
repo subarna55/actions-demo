@@ -21,7 +21,9 @@ jobs:
 
       - name: bump version
       - uses: actions/setup-node@v2
-      - run: npm --no-git-tag-version version patch > ${{github.workspace)}}/version
+        with:
+          node-version: '14'
+        run: npm --no-git-tag-version version patch > ${{github.workspace)}}/version
 
       - name: push to github
         run: |
