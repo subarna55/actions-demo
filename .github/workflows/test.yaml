@@ -20,6 +20,12 @@ jobs:
         uses: actions/checkout@v2
       - name: bump version and push to github
         run: |
+          git config user.email QualityEngineering@gannett.com
+          git config user.name quality-engineering
+          npm --no-git-tag-version version patch > ${{github.workspace)}}/version
+          echo "PACKAGE_VERSION=$( cat package.json | jq -r '.version' )" >> $GITHUB_ENV
+          git add package.json package-lock.json || { echo 'failed to update the index of package*.json' ; exit 1; }
+          git commit -m "[skip ci] ${PACKAGE_NAME} version bump"
           retryCount=0
           until [ "$n" -ge 5 ]
           do
