@@ -1,0 +1,30 @@
+# This is a PR workflow for the test-aggregator-api
+# Author: Quality-Engineering
+name: TaapiActions
+# Controls when the action will run. Triggers the workflow on push or pull request
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+  push:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      VAULT_ADDR: https://vault.gannettdigital.com
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: bump version and push to github
+        run: |
+          retryCount=0
+          until [ "$n" -ge 5 ]
+          do
+            git push https://$GH_USERNAME:$GH_TOKEN@github.com/GannettDigital/${REPO_NAME}.git && break
+            n=$((n+1))
+            sleep 5s
+            git pull --no-edit origin master
+          done
