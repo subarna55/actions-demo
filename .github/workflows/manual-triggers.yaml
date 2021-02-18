@@ -1,4 +1,4 @@
-name: Check users
+name: manual-trigger-input
 on:
   workflow_dispatch:
     inputs:
