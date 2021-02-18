@@ -1,6 +1,6 @@
 # This is a PR workflow for the test-aggregator-api
 # Author: Quality-Engineering
-name: TaapiActions
+name: package bump
 # Controls when the action will run. Triggers the workflow on push or pull request
 on:
   pull_request:
